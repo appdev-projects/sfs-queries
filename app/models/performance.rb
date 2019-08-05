@@ -17,14 +17,15 @@
 
 class Performance < ApplicationRecord
   
-  def last_decade
+  def Performance.last_decade
+    Performance.where("date > ?", 10.years.ago)
   end
   
-  def long
-    Performance.where("duration > ?", 90)
+  def Performance.long
+    Performance.where("duration > ?", 180)
   end
   
-  def short
+  def Performance.short
     Performance.where("duration <= ?", 90)
   end
   
