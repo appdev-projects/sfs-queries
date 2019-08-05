@@ -16,4 +16,23 @@
 
 
 class Performance < ApplicationRecord
+  
+  def last_decade
+  end
+  
+  def long
+    Performance.where("duration > ?", 90)
+  end
+  
+  def short
+    Performance.where("duration <= ?", 90)
+  end
+  
+  def artist
+    Artist.where(id: self.artist_id).first
+  end
+  
+  def venue
+    Venue.where(id: self.venue_id).first
+  end
 end
