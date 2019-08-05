@@ -34,19 +34,19 @@ describe Artist, "#past_shows" do
 
     first_performance = Performance.new
     first_performance.artist_id = artist.id
-    first_performance.venue_id = first_Venue.id
+    first_performance.venue_id = first_venue.id
     first_performance.save
 
     second_performance = Performance.new
     second_performance.artist_id = artist.id
-    second_performance.venue_id = third_Venue.id
+    second_performance.venue_id = third_venue.id
     second_performance.save
 
     third_performance = Performance.new
     third_performance.artist_id = artist.id
-    third_performance.venue_id = fifth_Venue.id
+    third_performance.venue_id = fifth_venue.id
     third_performance.save
 
-    expect(Artist.past_shows).to match_array([first_venue, third_venue, fifth_venue])
+    expect(artist.past_shows).to match_array([first_venue, third_venue, fifth_venue])
   end
 end

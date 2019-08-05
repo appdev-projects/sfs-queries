@@ -31,7 +31,7 @@ describe Venue, ".largest" do
     fourth_venue.size = 750
     fourth_venue.save
 
-    expect(Venue.largest).to eq(second_venue)
+    expect(Venue.largest).to eq(third_venue)
   end
 end
 
@@ -71,8 +71,8 @@ describe Venue, "#city" do
   end
 end
 
-describe Venue, "#perfomances" do
-  it "returns the perfomances that belong to the venue", points: 3 do
+describe Venue, "#performances" do
+  it "returns the performances that belong to the venue", points: 3 do
     venue = Venue.new
     venue.save
 
@@ -99,7 +99,7 @@ describe Venue, "#perfomances" do
     fifth_performance.venue_id = venue.id
     fifth_performance.save
 
-    expect(venue.perfomances).to match_array([first_performance, third_performance, fifth_performance])
+    expect(venue.performances).to match_array([first_performance, third_performance, fifth_performance])
   end
 end
   
@@ -109,12 +109,19 @@ end
     hideout.save
 
     little_dragon = Artist.new
+    little_dragon.name = "Little Dragon"
     little_dragon.save
     
     mitski = Artist.new
+    mitski.name = "Mitski"
     mitski.save
     
+    modest_mouse = Artist.new
+    modest_mouse.name = "Modest Mouse"
+    modest_mouse.save
+    
     chance_the_rapper = Artist.new
+    chance_the_rapper.name = "Chance the Rapper"
     chance_the_rapper.save
     
     talia_hall = Venue.new
@@ -137,14 +144,14 @@ end
 
     fourth_performance = Performance.new
     fourth_performance.venue_id = talia_hall.id
-    fourth_performance.artist_id = mitski.id
+    fourth_performance.artist_id = modest_mouse.id
     fourth_performance.save
 
     fifth_performance = Performance.new
     fifth_performance.venue_id = hideout.id
-    fifth_performance.artist_id = chance_the_rapper
+    fifth_performance.artist_id = chance_the_rapper.id
     fifth_performance.save
 
-    expect(hideout.perfomances).to match_array([little_dragon, mitski, chance_the_rapper])
+    expect(hideout.artists).to match_array([little_dragon, mitski, chance_the_rapper])
   end
 end

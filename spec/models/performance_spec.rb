@@ -20,22 +20,22 @@ require "rails_helper"
 describe Performance, ".last_decade" do
   it "returns the performances from within the last 10 dates", points: 3 do
     first_performance = Performance.new
-    first_performance.date = 2019
+    first_performance.date = 11.years.ago
     first_performance.save
 
     second_performance = Performance.new
-    second_performance.date = 2007
+    second_performance.date = 2.years.ago
     second_performance.save
 
     third_performance = Performance.new
-    third_performance.date = 2014
+    third_performance.date = 13.years.ago
     third_performance.save
 
     fourth_performance = Performance.new
-    fourth_performance.date = 1994
+    fourth_performance.date = 1.week.ago
     fourth_performance.save
 
-    expect(Performance.last_decade).to match_array([first_performance, third_performance])
+    expect(Performance.last_decade).to match_array([second_performance, fourth_performance])
   end
 end
 
@@ -98,71 +98,14 @@ end
 
 describe Performance, "#venue" do
   it "returns the venue that belong to the performance", points: 3 do
-    performance = Performance.new
-    performance.save
-
-    other_performance = Performance.new
-    other_performance.save
-
+    
     first_venue = Venue.new
-    first_venue.performance_id = performance.id
     first_venue.save
-
-    second_venue = Venue.new
-    second_venue.performance_id = other_performance.id
-    second_venue.save
-
-    third_venue = Venue.new
-    third_venue.performance_id = performance.id
-    third_venue.save
-
-    fourth_venue = Venue.new
-    fourth_venue.performance_id = other_performance.id
-    fourth_venue.save
-
-    fifth_venue = Venue.new
-    fifth_venue.performance_id = performance.id
-    fifth_venue.save
-
-    expect(performance.venue).to match_array([first_venue, third_venue, fifth_venue])
-  end
-end
-
-describe Performance, "#cast" do
-  it "returns the actors that appeared in the performance", points: 1 do
+    
     performance = Performance.new
+    performance.venue_id = first_venue.id
     performance.save
-
-    first_actor = Actor.new
-    first_actor.save
-
-    second_actor = Actor.new
-    second_actor.save
-
-    third_actor = Actor.new
-    third_actor.save
-
-    fourth_actor = Actor.new
-    fourth_actor.save
-
-    fifth_actor = Actor.new
-    fifth_actor.save
-
-    first_venue = Venue.new
-    first_venue.performance_id = performance.id
-    first_venue.actor_id = first_actor.id
-    first_venue.save
-
-    second_venue = Venue.new
-    second_venue.performance_id = performance.id
-    second_venue.actor_id = third_actor.id
-    second_venue.save
-
-    third_venue = Venue.new
-    third_venue.performance_id = performance.id
-    third_venue.actor_id = fifth_actor.id
-    third_venue.save
-
-    expect(performance.cast).to match_array([first_actor, third_actor, fifth_actor])
+    
+    expect(performance.venue).to eq(first_venue)
   end
 end
