@@ -12,4 +12,12 @@
 
 
 class Artist < ApplicationRecord
+  def past_shows
+    venue_ids = self.performances.pluck(:venue_id)
+    Venue.where(id: venue_ids)
+  end
+  
+  def performances
+    Performance.where(artist_id: self.id)
+  end
 end
