@@ -18,7 +18,7 @@
 require "rails_helper"
 
 describe Performance, ".last_decade" do
-  it "returns the performances from within the last 10 dates", points: 3 do
+  it "returns the performances from within the last 10 years", points: 3 do
     first_performance = Performance.new
     first_performance.date = 11.years.ago
     first_performance.save
